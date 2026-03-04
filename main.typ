@@ -3,8 +3,8 @@
   author: "kiwiizzz",
   title: "AlgoAnalysis",
 )
-#show "，":","
-#show "。":"."
+#show ",":"，"
+#show ".":"。"
 #include "chaptersTypst/chapter1.typ"
 #include "chaptersTypst/chapter2.typ"
 #include "chaptersTypst/chapter3.typ"

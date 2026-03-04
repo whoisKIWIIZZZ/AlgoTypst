@@ -1,6 +1,12 @@
-
-
-
+#import "@local/ysz_tools:0.1.0": *
+#show: conf.with(
+  author: "kiwiizzz",
+  title: "AlgoAnalysis",
+)
+#show ",":"，"
+#show "。":","
+#import "@preview/cuti:0.4.0":show-cn-fakebold
+#show:show-cn-fakebold
 = chapter1: 导论
 <chapter1-导论>
 #block[
@@ -8,6 +14,9 @@
   $ n ! tilde.op sqrt(2 pi n) (n / e)^n ( 1 + Theta ( 1 / n ) ) $
 
 ]
+啊啊啊寶寶妳是一條區
+*是啊,吃什么 是啊,吃什麼*
+再san
 == 基本概念
 <基本概念>
 算法是在有限的步骤内求解某一问题，所使用的一组定义明确的规则。也就是在通过一组有限定义的指令来完成一些任务，给定一个初始状态，并相应的获取最终结果。
