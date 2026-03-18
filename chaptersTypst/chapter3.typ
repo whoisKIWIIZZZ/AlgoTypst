@@ -1,5 +1,6 @@
 = chapter3 分治
 <chapter3-分治>
+// 哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲哦哦哦哦哦哦心理委员我好得劲
 把规模大的问题分解成小规模问题，要求子问题#strong[互相独立]且#strong[与原问题形式相同]，递归解决这些子问题，再把他们的解合并到原问题中，这样的策略称为#strong[分治法]。
 
 归纳法是#strong[尾递归]思想，通过扩展子问题解的方式得到原问题的解；而分治法是划分的思想，再合并得到原问题的解。
@@ -371,7 +372,96 @@ $ \( a + b i \) \( c + d i \) = \( alpha - beta \) + \( gamma - alpha - beta \) 
 
 === 最近点对问题
 <最近点对问题>
-方法是前面提到过的，按找$x$坐标排序后割开成两部分，最终答案就是$delta_l \, delta_r \, delta'$之间的最小值。但是关键的问题在于$delta'$（左右之间的最小值）该怎么求。（直接用前面求出来的$delta = min \( delta_l \, delta_r \)$，这样得到一个高为$delta$，长为$2 delta$的矩形，显然对于一个正方形来说，两两距离超过边长的点最多有4个，所以这个最多有8个，这样只需要枚举其附近的7个点即可。
+方法是前面提到过的，按找$x$坐标排序后割开成两部分，最终答案就是$delta_l \, delta_r \, delta'$之间的最小值。但是关键的问题在于$delta'$（左右之间的最小值）该怎么求。
+
+直接用前面求出来的$delta = min \( delta_l \, delta_r \)$，在中线划分出一个带状区域：`[mid_x - delta, mid_x + delta]` 范围内的点。这些点是“可疑分子”，可能构成更小的距离。
+
+然后在带状区域中寻找更小的距离。在矩形带内从下到上滑动一个高为$delta$，长为$2 delta$的矩形。显然对于一个边长为$delta$的正方形来说，两两距离超过边长的点最多有4个，所以最多有8个点能共存于这样高为$delta$长为$2 delta$的矩形，故只需要从矩形带最下方的点开始，对每个点构造这样的矩形，最多枚举7个点即可。
+
+```python
+import math
+
+# 辅助函数：计算两点间的欧几里得距离
+def dist(p1, p2):
+    return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
+
+# 暴力法：当点数很少时（<=3），直接两两比较
+def brute_force(points):
+    min_dist = float('inf')
+    n = len(points)
+    for i in range(n):
+        for j in range(i + 1, n):
+            d = dist(points[i], points[j])
+            if d < min_dist:
+                min_dist = d
+    return min_dist
+
+# 核心递归函数
+# points_x: 当前范围内按 X 排序的点列表
+# points_y: 当前范围内按 Y 排序的点列表 (这是为了保持 O(N log N) 的关键)
+def closest_pair_recursive(points_x, points_y):
+    n = len(points_x)
+    
+    # 1. 递归基：如果点很少，直接用暴力法
+    if n <= 3:
+        return brute_force(points_x)
+    
+    # 2. 分解 (Divide)
+    mid = n // 2
+    mid_point = points_x[mid]
+    
+    # 将 points_y 分割成左右两部分 (保持 Y 有序)
+    # 注意：这里不能简单切片，因为 points_y 是全局 Y 有序的，需要根据 X 坐标判断归属
+    left_y = [p for p in points_y if p[0] <= mid_point[0]]
+    right_y = [p for p in points_y if p[0] > mid_point[0]]
+    
+    # 对应的 X 有序列表直接切片即可
+    left_x = points_x[:mid]
+    right_x = points_x[mid:]
+    
+    # 3. 解决 (Conquer) - 递归求解左右两边
+    delta_left = closest_pair_recursive(left_x, left_y)
+    delta_right = closest_pair_recursive(right_x, right_y)
+    
+    # 取左右两边的较小值作为当前的最小距离 delta
+    delta = min(delta_left, delta_right)
+    
+    # 4. 合并 (Combine) - 处理跨越中线的点对
+    
+    # 4.1 构建带状区域 T (Strip)
+    # 从 Y 有序列表中，筛选出 X 坐标在 [mid_x - delta, mid_x + delta] 范围内的点
+    # 这些点是“可疑分子”，可能构成更小的距离
+    strip = []
+    mid_x = mid_point[0]
+    for p in points_y:
+        if abs(p[0] - mid_x) < delta:
+            strip.append(p)
+    
+    # 4.2 在带状区域内寻找更小的距离
+    # 关键优化：对于 strip 中的每个点，只需要检查它后面最多 7 个点
+    min_strip_dist = delta
+    for i in range(len(strip)):
+        # j 从 i+1 开始，且限制最多检查 7 个点
+        # 同时如果 Y 方向距离已经超过 delta，也可以提前停止 (双重保险)
+        for j in range(i + 1, min(i + 8, len(strip))):
+            if strip[j][1] - strip[i][1] >= delta:
+                break
+            d = dist(strip[i], strip[j])
+            if d < min_strip_dist:
+                min_strip_dist = d
+    
+    # 返回最终的最小值
+    return min(min_strip_dist, delta)
+
+# 主函数：初始化排序并调用递归
+def closest_pair(points):
+    # 预处理：分别生成按 X 和按 Y 排序的列表
+    # 这一步只做一次，复杂度 O(N log N)
+    points_x = sorted(points, key=lambda p: p[0])
+    points_y = sorted(points, key=lambda p: p[1])
+    
+    return closest_pair_recursive(points_x, points_y)
+```
 
 == 本章作业
 <本章作业>
