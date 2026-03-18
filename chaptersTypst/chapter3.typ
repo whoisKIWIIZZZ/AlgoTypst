@@ -1,6 +1,3 @@
-
-
-
 = chapter3 分治
 <chapter3-分治>
 把规模大的问题分解成小规模问题，要求子问题#strong[互相独立]且#strong[与原问题形式相同]，递归解决这些子问题，再把他们的解合并到原问题中，这样的策略称为#strong[分治法]。
@@ -32,13 +29,9 @@
 === 归并排序
 <归并排序>
 #block[
-  $t arrow.l 1$ \
-
-]
-#block[
 ]
 如果$n$是2的幂时，两个算法的执行比较次数相同。合并两个排好序的子数组，所需要的元素比较次数在$n / 2$和$n - 1$之间，所以最小比较次数是：
-$ c \( n \) = 2 c \( n / 2 \) + n / 2 \, n gt.eq 2 $
+$ c \( n \) = 2 c \( n / 2 \) + n / 2 \， n gt.eq 2 $
 
 最多比较次数： $ c \( n \) = 2 c \( n / 2 \) + n - 1 \, n gt.eq 2 $
 
@@ -49,18 +42,24 @@ $ c \( n \) = c \( floor.l n \/ 2 floor.r \) + c \( ceil.l n \/ 2 ceil.r \) + b 
 === 选择问题：寻找第k小元素
 <选择问题寻找第k小元素>
 #block[
-  $arrow.l$ - + 1 \
-  let = $floor.l p \/ 5 floor.r$.Divide into groups of 5 elements each. If
-  5 doesn't divide , then discard the remaining elements. \
-  Sort each of the groups individually and extract its median element. Let
-  the set of medians be $M$ \
-  $arrow.l$ ($M$, 1, , $floor.l$/2$floor.r$) Partition into three arrays:
-  \
-  $A_1 arrow.l { A \| A < m m }$
-  ,$A_2 arrow.l { A \| A = m m }$,$A_3 arrow.l { A \| A > m m }$ \
+分组：将 $n$ 个元素每 5 个一组，分成 $\lfloor n/5 \rfloor$ 组。
+
+找中位数：对每组进行内部排序（因为每组只有 5 个元素，复杂度是 $O(1)$），找出每组的中位数。
+
+递归找“中位数的中位数”：将上一步找到的所有中位数组成一个新集合 $M$，递归调用算法，找到 $M$ 中的中位数，记为 $m m$。
+
+划分（Partition）：以 $m m$ 为基准，将原数组分为三部分：
+- $A_1$: 小于 $m m$ 的元素。
+- $A_2$: 等于 $m m$ 的元素。
+- $A_3$: 大于 $m m$ 的元素。
 
 ]
-设$A'_1$表示小于等于$m m$的元素集，$A'_3$表示大于等于$m m$的元素集。所以：
+
+#image("/assets/image.png")
+
+设$A'_1$表示小于等于$m m$的元素集，$A'_3$表示大于等于$m m$的元素集。
+
+由于$A'_1$至少与W区域同样大，然后用总的元素个数减去$A'_1$就是$A_3$：
 $
   & \| A'_1 \| gt.eq 3 ceil.l frac(floor.l n \/ 5 floor.r, 2) ceil.r gt.eq 3 / 2 floor.l n / 5 floor.r \
   & \| A_3 \| lt.eq n - 3 / 2 floor.l n / 5 floor.r lt.eq n - 3 / 2 \( frac(n - 4, 5) \) = n - 0.3 n + 1.2 = 0.7 n + 1.2 \
@@ -68,8 +67,12 @@ $
 
 令$0.7 n + 1.2 lt.eq floor.l 0.75 n floor.r$，解得$n gt.eq 44$\(这里的$3 / 4$选的很好，不到$4 / 5$，又超过$2 / 3$)
 
-所以有： $ T \( n \) lt.eq { & c                                                                          &     upright("if ") n < 44 \
-  & T \( floor.l n / 5 floor.r \) + T \( floor.l frac(3 n, 4) floor.r \) + c n & upright("if ") n gt.eq 44 \ $ 因而$T \( n \) lt.eq frac(c n, 1 - 1 / 5 - 3 / 4) = 20 c n$。
+所以有： $
+T(n) <= cases(
+  c & "if " n < 44,
+  T(floor(n / 5)) + T(floor((3n) / 4)) + c n & "if " n >= 44
+)
+$ 因而$T \( n \) lt.eq frac(c n, 1 - 1 / 5 - 3 / 4) = 20 c n$。
 
 对于代码实现，我们可以对快排进行改造：
 
