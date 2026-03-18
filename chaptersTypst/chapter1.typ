@@ -100,7 +100,6 @@ $ f ( n ) = o ( g ( n ) ) <==> f ( n ) = O ( g ( n ) ) and g ( n ) eq.not O ( f 
 + 自反性：$Theta \, O \, Omega$
 
 + 对称性：$Theta$
-
 + 互对称性：
   $
     f ( n ) = O ( g ( n ) ) & arrow.l.r.double g ( n ) = Omega ( f ( n ) ) \
