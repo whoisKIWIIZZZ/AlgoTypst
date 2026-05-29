@@ -2,6 +2,8 @@
 #show: conf.with(
   author: "kiwiizzz",
   title: "AlgoAnalysis",
+  header-title: "AlgoAnalysis",
+  header-chapter: "CHAPTER 1",
 )
 #show ",":"，"
 #show "。":","
