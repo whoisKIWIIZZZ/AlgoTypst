@@ -1,6 +1,9 @@
 
 
 
+#import "@local/ysz_tools:0.1.0": *
+#show: conf
+
 = chapter11: 近似算法
 <chapter11-近似算法>
 == 导入

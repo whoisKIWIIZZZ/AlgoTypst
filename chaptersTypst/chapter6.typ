@@ -1,6 +1,9 @@
 
 
 
+#import "@local/ysz_tools:0.1.0": *
+#show: conf
+
 = chapter6: 图的遍历
 <chapter6-图的遍历>
 == 割点

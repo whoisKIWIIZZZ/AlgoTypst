@@ -1,5 +1,5 @@
- 
-
+#import "@local/ysz_tools:0.1.0": *
+#show: conf
 
 = chapter4 动态规划
 <chapter4-动态规划>
@@ -13,7 +13,7 @@
 
 == 最长公共子序列
 <最长公共子序列>
-#defination[#strong[题面]：给定两个序列 $X = chevron.l x_1 \, dots.h \, x_m chevron.r$ 和 $Y = chevron.l y_1 \, dots.h \, y_n chevron.r$，求它们的最长公共子序列（LCS）的长度。#emph[子序列]是指从原序列中删除若干元素（可能为0个）后保持原有相对顺序的序列。例如，序列 $(1, 3, 5)$ 是 $(1, 2, 3, 4, 5)$ 的子序列，而 $(1, 5, 3)$ 不是。#emph[公共子序列]是指同时是两个序列子序列的序列。]
+#definition[#strong[题面]：给定两个序列 $X = chevron.l x_1 \, dots.h \, x_m chevron.r$ 和 $Y = chevron.l y_1 \, dots.h \, y_n chevron.r$，求它们的最长公共子序列（LCS）的长度。#emph[子序列]是指从原序列中删除若干元素（可能为0个）后保持原有相对顺序的序列。例如，序列 $(1, 3, 5)$ 是 $(1, 2, 3, 4, 5)$ 的子序列，而 $(1, 5, 3)$ 不是。#emph[公共子序列]是指同时是两个序列子序列的序列。]
 
 要证明最长公共子序列问题满足最优子结构性质，设$X = chevron.l x_1 \, dots.h \, x_m chevron.r$和$Y = chevron.l y_1 \, dots.h \, y_n chevron.r$的LCS为$Z = chevron.l z_1 \, dots.h \, z_k chevron.r$。当$x_m = y_n$时必有$z_k = x_m$，否则可将$x_m$追加到$Z$得到更长子序列导致矛盾，此时$Z_(k - 1)$必须是$X_(m - 1)$和$Y_(n - 1)$的LCS，若存在更长的$W$则$W xor x_m$将形成更长公共子序列；当$x_m eq.not y_n$时，若$z_k eq.not x_m$则$Z$是$X_(m - 1)$和$Y$的LCS，若$z_k eq.not y_n$则$Z$是$X$和$Y_(n - 1)$的LCS，否则可通过选择更长子序列构造矛盾。由此LCS的最优解总由子问题最优解构成，满足最优子结构性质。
 

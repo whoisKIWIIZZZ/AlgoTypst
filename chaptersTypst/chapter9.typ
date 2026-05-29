@@ -1,6 +1,9 @@
 
 
 
+#import "@local/ysz_tools:0.1.0": *
+#show: conf
+
 = chapter9: 分支限界法
 <chapter9-分支限界法>
 == 分支-限界法基本原理

@@ -1,6 +1,9 @@
 
 
 
+#import "@local/ysz_tools:0.1.0": *
+#show: conf
+
 = chapter8: 回溯法
 <chapter8-回溯法>
 == 回溯法基本原理

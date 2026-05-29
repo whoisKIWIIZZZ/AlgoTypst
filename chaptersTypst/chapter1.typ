@@ -225,7 +225,6 @@ $ sum a_i = sum c_i + Phi ( D_n ) - Phi ( D_0 ) $
                 & = Theta ( f ( n ) ) quad (f ( n ) = Omega (n^(log_b a + epsilon)))
     $
 
-  ~◻
 
 ]
 对于$T ( n ) = 2 T ( n / 2 ) + n log n$,

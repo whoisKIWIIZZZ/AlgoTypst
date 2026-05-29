@@ -1,6 +1,9 @@
 
 
 
+#import "@local/ysz_tools:0.1.0": *
+#show: conf
+
 = chapter10: 随机算法
 <chapter10-随机算法>
 == 导论

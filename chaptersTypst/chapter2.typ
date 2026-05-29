@@ -1,3 +1,6 @@
+#import "@local/ysz_tools:0.1.0": *
+#show: conf
+
 = chapter2 归纳法
 <chapter2-归纳法>
 将一个问题分割成多个子问题，这些子问题与原来的问题有相同的结构，分而治之。
