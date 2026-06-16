@@ -5,7 +5,7 @@
   header-chapter: "CHAPTER 8",
   sidebar: false,
 )
-
+#let problem = remark
 = chapter8: 回溯法
 <chapter8-回溯法>
 
