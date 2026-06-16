@@ -172,8 +172,8 @@ $ sum a_i = sum c_i + Phi ( D_n ) - Phi ( D_0 ) $
 === 主定理
 <主定理>
 #block[
-  设$a gt.eq 1 \, b gt.eq 1$为常数，$f ( n )$为函数,
-  $T ( n )$为非负正数，且 $ T ( n ) = a T ( n / b ) + f ( n ) $
+  设$a gt.eq 1 \, b gt 1$为常数，$f ( n )$为函数,
+  $T ( n )$为非负实数，且 $ T ( n ) = a T ( n / b ) + f ( n ) $
   那么就有
 
   - $f ( n ) = O ( n^(log_b a - epsilon) ) \, epsilon > 0$
