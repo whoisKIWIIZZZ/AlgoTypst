@@ -1,38 +1,59 @@
 #import "@local/ysz_tools:0.1.0": *
-#show: conf
+#show: conf.with(
+  sidebar: false
+)
 
 = chapter2 归纳法
 <chapter2-归纳法>
 将一个问题分割成多个子问题，这些子问题与原来的问题有相同的结构，分而治之。
 == 归纳算法举例
+=== 排序,快速幂
+很熟知了.
+#grid(
+  columns: (1fr, 1fr), // 定义两列，每列各占一半
+  gutter: 1cm,
+  image("/assets/image-5.png"),
+image("/assets/image-6.png")
+)
+
+
 <归纳算法举例>
 === 多项式求值
 <多项式求值>
 假设有$n + 2$个实数$a_0 \, a_1 \, . . . \, a_n$和$x$的序列，现在要对以下多项式求值：
-$ P_n( x) = sum_(i = 0)^n a_i x^i $ 我们发现：
-$ p_n( x) =(( . . .((( a_n x + a_(n - 1)) x + a_(n - 2)) x + a_(n - 3)) . . .)) x + a_0 $
-所以，我们得到具体表达式为：
-$ p_(n - 1)( x) = a_n x^(n - 1) + a_(n - 1) x^(n - 2) +dots+ a_2 x + a_1 $
-所以，有递推关系： $ p_j( x) = x p_(j - 1)( x) + a_(n - j) $
-
-#quote[Horner rule是什么?好吧就是上面那个]
+$ P_n( x) = sum_(i = 0)^n a_i x^i $ 
+直接挨个算是$n(n-1)/2$次乘法.注意到,
+$ p_n ( x) =(( . . .((( a_n x + a_(n - 1)) x + a_(n - 2)) x + a_(n - 3)) . . .)) x + a_0 $
+所以，
+$p_(n - 1)( x) = a_n x^(n - 1) + a_(n - 1) x^(n - 2) +dots+ a_2 x + a_1 $
+所以，有递推关系： $ p_j( x) = x p_(j - 1)( x) + a_(n - j) $.这便是*Horner rule*.
+#grid(
+  columns: (1fr, 1fr), // 定义两列，每列各占一半
+  gutter: 1cm,
+  image("/assets/image-7.png"),
+image("/assets/image-8.png")
+)
 
 === 生成排列
 <生成排列>
-#block[
-  perm1(1) \
-  perm1(m) \
-// 不是这个block是干嘛的
-]
-显然，对于重复次数$f( n)$有以下递推关系：
+第一个思路:假如可以生成$n-1$个数的排列,在生成好的排列前面依次加$1~n$就好了.
+显然，对于重复次数$f( n)$有以下递推关系(+n是为了处理输入)：
 $ f( n) = n f( n - 1) + n \, n gt.eq 2 $
 令$f( n) = n ! h( n)$, 那么
-$ n ! h( n) = n( n - 1) ! h( n - 1) + n $ 即
-$ h( n) = h( n - 1) + frac(1,( n - 1) !) $ 解得
+$ h( n) = h( n - 1) + frac(1,( n - 1) !) $ 
 $ h( n) = h( 1) + sum_(i = 1)^(n - 1) frac(1, i !) <= e - 1 $
 所以 $ f( n) = n ! h( n) <( e - 1) n ! < 2 dot.op n ! $
 而输出语句的复杂度是$Theta( n)$，所以最终$T( n) = Theta( n dot.op n !)$
+#grid(
+columns: (1fr, 1fr), // 定义两列，每列各占一半
+  gutter: 1cm,         // 两列之间的间距
+  block[
+  第二种方法:
+  先初始化排序好的数组$o[n]$,然后尝试把$n$分别放到$1,2,...,n$个位置里.
 
+  $ f( m) = m f( m - 1) + n \, n gt.eq 2 $(注意这里m和n的区别).最后算出来$T( n) = Theta( n dot.op n !)$.
+],
+note[
 这里用到的思想其实是一种累加法的变体。也就是考虑递推式
 $ f( n) = g( n) f( n - 1) + h( n) $
 
@@ -45,9 +66,19 @@ $
 $ p( n) = p( n - 1) + frac(1, product_(i = 1)^n g( i)) h( n) $
 $ p( n) = p( 1) + sum_(i = 1)^n frac(1, product_(j = 1)^i g( j)) h( i) $
 由此，即可求出$f( n)$，不过要注意无穷级数的作用。
+]
+)
 
-// #remark["重生之我是C++STL大神之std::next_permutation"]
+#grid(
+  columns: (1fr, 1fr), // 定义两列，每列各占一半
+  gutter: 1cm,
+  image("/assets/image-9.png"),
+image("/assets/image-10.png")
+)
+=== Next permutation
+#remark["重生之我是C++STL大神之std::next_permutation"]
   “寻找下一个排列”的接口：std::next_permutation
+
 C++ <algorithm> 头文件中提供了 std::next_permutation(begin, end)。
 
 功能：将序列重排为字典序中的下一个排列。如果当前已经是最大排列（降序），则重排为最小排列（升序）并返回 false，否则返回 true。
@@ -56,33 +87,21 @@ C++ <algorithm> 头文件中提供了 std::next_permutation(begin, end)。
 实现原理（字典序算法）：
 它不需要知道总共有多少个排列，也不需要计算阶乘。它只通过比较相邻元素的大小来操作。
 
-算法步骤（以 [1, 3, 2] 为例）：
-从右向左查找第一对满足 a[i] < a[i+1] 的元素。找到分界点 i。
-在 [1, 3, 2] 中，1 < 3，所以 i=0 (元素1)。
-从右向左查找第一个大于 a[i] 的元素 a[j]。
-在 [1, 3, 2] 中，右边比 1 大的有 3 和 2，最右边的是 2。所以 j=2 (元素2)。
-交换 a[i] 和 a[j]。
-交换 1 和 2 -> [2, 3, 1]。
-反转 i+1 到末尾的所有元素。
-反转 3, 1 -> [2, 1, 3]。
-
-结果：[2, 1, 3] 就是 [1, 3, 2] 的下一个排列。
+算法步骤:从右向左查找第一对满足 a[i] < a[i+1] 的元素,然后从右向左查找第一个大于 a[i] 的元素 a[j]。交换 a[i] 和 a[j]。例如,[2, 1, 3] 就是 [1, 3, 2] 的下一个排列。
 
 
 === 基数排序
 <基数排序>
 令 $L = { a_1 \, a_2 \, dots.h \, a_n }$ 是一张有 $n$
 个数的集合，其中每个数恰好有 $k$ 位数字，就是说每个数具有
-$d_k d_(k - 1) dots.h d_1$ 形式，这里 $d_i$ 是 $0$ 到 $9$ 中的一个数字。
+$d_k d_(k - 1) dots.h d_1$ 形式，这里 $d_i$ 是 $0$ 到 $9$ 中的一个数字。*我们对整数的大小 $k$ 施行归纳*
 
-我们研究一种排序算法对 $L$
-进行非降序排列，使算法在几乎所有的实际应用中都以线性时间运行。
-
-在这个问题中，我们对整数的大小 $k$ 施行归纳，而不是对数 $n$
-这个对象来用归纳法。
-
-#block[
-]
+#grid(
+  columns: (1fr, 1fr), // 定义两列，每列各占一半
+  gutter: 1cm,
+  image("/assets/image-11.png"),
+image("/assets/image-12.png")
+)
 时间复杂度：$Theta( k n)$, 空间复杂度：$Theta( 10 n)$
 
 === 寻找多数元素
@@ -108,11 +127,11 @@ $d_k d_(k - 1) dots.h d_1$ 形式，这里 $d_i$ 是 $0$ 到 $9$ 中的一个数
 ]
 时间复杂度$Theta( n)$，空间复杂度$Theta( 1)$
 
-=== 棋子移动游戏
-<棋子移动游戏>
-洛谷题：#link("https://www.luogu.com.cn/problem/P1259")
+// === 棋子移动游戏
+// <棋子移动游戏>
+// 洛谷题：#link("https://www.luogu.com.cn/problem/P1259")
 
-对于最后处理的4对棋子是需要特殊对待的，不然会在2白2空2黑的时候卡死。
+// 对于最后处理的4对棋子是需要特殊对待的，不然会在2白2空2黑的时候卡死。
 
 == 本章习题
 <本章习题>
