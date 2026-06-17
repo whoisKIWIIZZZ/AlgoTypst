@@ -7,7 +7,7 @@
 |第3章|分治|zoomy|-|
 |第4章|动态规划|kiwiizzz|-|
 |第5章|贪心|kiwiizzz|-|
-|第6章|图的遍历|zoomy|-|
+|第6章|图的遍历|zoomy|ok|
 |第7章|计算理论|kiwiizzz|ok|
 |第8章|回溯|xhkz|ok|
 |第9章|分支限界|xhkz|ok|

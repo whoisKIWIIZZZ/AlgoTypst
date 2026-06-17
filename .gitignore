@@ -2,3 +2,7 @@ resources/*
 resources
 .vscode
 .DS_Store
+.claude
+.claude/*
+temp.md
+output.typ
