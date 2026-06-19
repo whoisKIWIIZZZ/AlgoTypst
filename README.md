@@ -4,7 +4,7 @@
 |-|-|-|-|
 |第1章|绪论|zoomy|ok|
 |第2章|归纳|kiwiizzz|ok|
-|第3章|分治|zoomy|-|
+|第3章|分治|zoomy|ok|
 |第4章|动态规划|kiwiizzz|-|
 |第5章|贪心|kiwiizzz|-|
 |第6章|图的遍历|zoomy|ok|
