@@ -1,10 +1,10 @@
-#import "@local/ysz_tools:0.1.0": *
-#show: conf.with(
-  title: "AlgoAnalysis",
-  header-title: "AlgoAnalysis",
-  header-chapter: "CHAPTER 8",
-  sidebar: false,
-)
+#import "../lib.typ": *
+// #show: conf.with(
+//   title: "AlgoAnalysis",
+//   header-title: "AlgoAnalysis",
+//   header-chapter: "CHAPTER 8",
+//   sidebar: false,
+// )
 #let problem = remark
 = chapter8: 回溯法
 <chapter8-回溯法>

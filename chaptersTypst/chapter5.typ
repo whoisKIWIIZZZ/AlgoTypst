@@ -1,8 +1,8 @@
-#import "@local/ysz_tools:0.1.0": *
+#import "../lib.typ": *
 
-#show: conf.with(
-  sidebar: false,
-)
+// #show: conf.with(
+//   sidebar: false,
+// )
 #set line(length: 100%, stroke: 0.1pt)
 
 = chapter5: 贪心算法

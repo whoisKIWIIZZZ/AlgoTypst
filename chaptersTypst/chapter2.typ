@@ -1,7 +1,7 @@
-#import "@local/ysz_tools:0.1.0": *
-#show: conf.with(
-  sidebar: false
-)
+#import "../lib.typ": *
+// #show: conf.with(
+//   sidebar: false
+// )
 
 = chapter2 归纳法
 <chapter2-归纳法>

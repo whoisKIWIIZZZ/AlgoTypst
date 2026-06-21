@@ -1,4 +1,4 @@
-#import "@local/ysz_tools:0.1.0": *
+#import "../lib.typ": *
 #show: conf.with(
   author: "kiwiizzz",
   title: "AlgoAnalysis",

@@ -1,5 +1,5 @@
-#import "@local/ysz_tools:0.1.0": *
-#show: conf
+#import "../lib.typ": *
+// #show: conf
 
 = chapter6: 图的遍历
 <chapter6-图的遍历>

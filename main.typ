@@ -1,7 +1,9 @@
-#import "@local/ysz_tools:0.1.0": *
+#import "lib.typ": *
+
 #show: conf.with(
-  author: "kiwiizzz",
+  author: "BJHH2005,kiwiizzz,xhkzdepartedream,Zoomy,kaizhaolin",
   title: "AlgoAnalysis",
+  sidebar: false
 )
 #include "chaptersTypst/chapter1.typ"
 #include "chaptersTypst/chapter2.typ"

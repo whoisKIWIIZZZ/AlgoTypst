@@ -4,10 +4,10 @@
 #let npc = $bold("NPC")$
 #let ltk = $lt.eq.slant_K$
 #let p = $bold("P")$
-#import "@local/ysz_tools:0.1.0": *
-#show: conf.with(
-  sidebar: false,
-)
+#import "../lib.typ": *
+// #show: conf.with(
+//   sidebar: false,
+// )
 #set line(length: 100%, stroke: 0.1pt)
 = chapter7: NP完全问题
 <chapter7-np完全问题>

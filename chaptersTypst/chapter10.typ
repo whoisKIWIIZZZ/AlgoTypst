@@ -1,5 +1,5 @@
-#import "@local/ysz_tools:0.1.0": *
-
+#import "../lib.typ": *
+#let problem = remark
 = chapter10: 随机算法
 <chapter10-随机算法>
 

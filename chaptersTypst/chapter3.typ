@@ -1,5 +1,5 @@
-#import "@local/ysz_tools:0.1.0": *
-#show: conf
+#import "../lib.typ": *
+
 
 = chapter3 分治
 <chapter3-分治>

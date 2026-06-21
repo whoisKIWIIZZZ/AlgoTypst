@@ -1,10 +1,5 @@
-#import "@local/ysz_tools:0.1.0": *
-#show: conf.with(
-  author: "kiwiizzz",
-  title: "AlgoAnalysis",
-  header-title: "AlgoAnalysis",
-  header-chapter: "CHAPTER 1",
-)
+#import "../lib.typ": *
+
 #show ",":"，"
 #show "。":","
 #import "@preview/cuti:0.4.0":show-cn-fakebold

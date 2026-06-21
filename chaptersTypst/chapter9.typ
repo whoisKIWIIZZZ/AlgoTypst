@@ -1,5 +1,5 @@
-#import "@local/ysz_tools:0.1.0": *
-
+#import "../lib.typ": *
+#let problem = remark
 = chapter9: 分支限界法
 <chapter9-分支限界法>
 
