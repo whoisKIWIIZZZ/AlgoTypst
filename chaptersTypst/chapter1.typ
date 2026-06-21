@@ -83,7 +83,7 @@ $ f ( n ) = o ( g ( n ) ) <==> f ( n ) = O ( g ( n ) ) and g ( n ) eq.not O ( f 
 
 === $omega$-记号：非紧下界记号
 <omega-记号非紧下界记号>
-对于任意给定的$c > 0$，都存在正整数$n_0$，使得当$n gt.eq n_0$时有$f ( n ) > c dot.op g ( n )$，则称函数$f ( n )$时$omega ( g ( n ) )$的，记为$f ( n ) = omega ( g ( n ) )$。
+对于任意给定的$c > 0$，都存在正整数$n_0$，使得当$n gt.eq n_0$时有$f ( n ) > c dot.op g ( n )$，则称函数$f ( n )$是$omega ( g ( n ) )$的，记为$f ( n ) = omega ( g ( n ) )$。
 
 等价于：$lim_(n arrow.r oo) frac(f ( n ), g ( n )) = oo ==> f ( n ) = omega ( g ( n ) )$.
 

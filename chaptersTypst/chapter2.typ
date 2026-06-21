@@ -12,8 +12,8 @@
 #grid(
   columns: (1fr, 1fr), // 定义两列，每列各占一半
   gutter: 1cm,
-  image("/assets/image-5.png"),
-image("/assets/image-6.png")
+  image("../assets/image-5.png"),
+image("../assets/image-6.png")
 )
 
 
@@ -22,7 +22,7 @@ image("/assets/image-6.png")
 <多项式求值>
 假设有$n + 2$个实数$a_0 \, a_1 \, . . . \, a_n$和$x$的序列，现在要对以下多项式求值：
 $ P_n( x) = sum_(i = 0)^n a_i x^i $ 
-直接挨个算是$n(n-1)/2$次乘法.注意到,
+直接挨个算是$1+2+...+n=n(n+1)/2$次乘法.注意到,
 $ p_n ( x) =(( . . .((( a_n x + a_(n - 1)) x + a_(n - 2)) x + a_(n - 3)) . . .)) x + a_0 $
 所以，
 $p_(n - 1)( x) = a_n x^(n - 1) + a_(n - 1) x^(n - 2) +dots+ a_2 x + a_1 $
@@ -30,8 +30,8 @@ $p_(n - 1)( x) = a_n x^(n - 1) + a_(n - 1) x^(n - 2) +dots+ a_2 x + a_1 $
 #grid(
   columns: (1fr, 1fr), // 定义两列，每列各占一半
   gutter: 1cm,
-  image("/assets/image-7.png"),
-image("/assets/image-8.png")
+  image("../assets/image-7.png"),
+image("../assets/image-8.png")
 )
 
 === 生成排列
@@ -51,7 +51,10 @@ columns: (1fr, 1fr), // 定义两列，每列各占一半
   第二种方法:
   先初始化排序好的数组$o[n]$,然后尝试把$n$分别放到$1,2,...,n$个位置里.
 
-  $ f( m) = m f( m - 1) + n \, n gt.eq 2 $(注意这里m和n的区别).最后算出来$T( n) = Theta( n dot.op n !)$.
+  $ f(m) = cases(
+    0\, & m = 0,
+    m f(m - 1) + n \, #h(0.2em) & m gt.eq 1,
+  ) $(注意这里m和n的区别).最后算出来$T( n) = Theta( n dot.op n !)$.
 ],
 note[
 这里用到的思想其实是一种累加法的变体。也就是考虑递推式
@@ -72,8 +75,8 @@ $ p( n) = p( 1) + sum_(i = 1)^n frac(1, product_(j = 1)^i g( j)) h( i) $
 #grid(
   columns: (1fr, 1fr), // 定义两列，每列各占一半
   gutter: 1cm,
-  image("/assets/image-9.png"),
-image("/assets/image-10.png")
+  image("../assets/image-9.png"),
+image("../assets/image-10.png")
 )
 === Next permutation
 #remark["重生之我是C++STL大神之std::next_permutation"]
@@ -99,8 +102,8 @@ $d_k d_(k - 1) dots.h d_1$ 形式，这里 $d_i$ 是 $0$ 到 $9$ 中的一个数
 #grid(
   columns: (1fr, 1fr), // 定义两列，每列各占一半
   gutter: 1cm,
-  image("/assets/image-11.png"),
-image("/assets/image-12.png")
+  image("../assets/image-11.png"),
+image("../assets/image-12.png")
 )
 时间复杂度：$Theta( k n)$, 空间复杂度：$Theta( 10 n)$
 
@@ -125,6 +128,9 @@ image("/assets/image-12.png")
   $c arrow.l upright("candidate")( 1)$ $c o u n t arrow.l 0$
 
 ]
+
+注：该算法第一遍只产生多数元素的候选者。若题目不保证多数元素存在，还需检查该候选者是否是多数元素
+
 时间复杂度$Theta( n)$，空间复杂度$Theta( 1)$
 
 // === 棋子移动游戏
@@ -161,9 +167,22 @@ image("/assets/image-12.png")
     [$O( n dot.op 2^n)$],
     [位数$d = ceil.l n log_10 2 ceil.r = Theta( n)$，且输入规模为$2^n$量级。],
   )],
-  caption: [基数排序（RADIXSORT）的时间复杂性分析],
+  caption: [基数排序（RADIXSORT）的时间复杂性分析
+  #footnote[
+  基数排序的时间复杂度一般为
+  $Theta((n + r) ceil(log_r U))$，
+  其中 $n$ 为元素个数，$r$ 为基数，$U$ 为元素最大值。
+  若取 $r=10$，则三个范围的复杂度分别为
+  $Theta(n log n)$、$Theta(n log n)$ 和 $Theta(n^2)$；
+  若取 $r = n$，则分别为
+  $Theta(n)$、$Theta(n)$ 和
+  $Theta(n^2 / log n)$。
+  ]
+],
   kind: table,
 )
+
+
 
 === 寻找名人问题
 <寻找名人问题>

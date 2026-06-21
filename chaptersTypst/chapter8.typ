@@ -416,8 +416,8 @@ $ P(x_1, x_2, ..., x_(k+1)) "为真" arrow.r P(x_1, x_2, ..., x_k) "为真" $
 #figure(
   grid(
     columns: (1fr, 1fr),
-    image("/assets/image-1.png", width: 100%),
-    image("/assets/image-2.png", width: 104%),
+    image("../assets/image-1.png", width: 100%),
+    image("../assets/image-2.png", width: 104%),
   ),
 )
 
