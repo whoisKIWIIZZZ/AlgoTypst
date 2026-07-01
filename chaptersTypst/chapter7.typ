@@ -242,7 +242,7 @@ NPI class: the class of problems that they and their  complementation are in NP,
 #block[
   #emph[Proof.] (1) $"TSP" in #np$.对无向完全图$G$和正整数$K$,猜测$G$中所有顶点的一个排列(代表可能的路线),然后检查权值和.
 
-  \(2) $"HC" lt.eq_(K) "TSP"$.对于一个无向无权图$G = angle.l V,E angle.r$,构造无向带权的完全图$G' = angle.l V,E' angle.r$,且权值$d(v_1,v_2) = cases(delim: "{", L\/n \, & upright("若 ") \( u \, v \) in E, L+1 \, & upright("若 ") \( u \, v \) in.not E)$.若$G$有哈密顿回路,$G'$
+  \(2) $"HC" lt.eq_(K) "TSP"$.对于一个无向无权图$G = ⟨ V,E ⟩$,构造无向带权的完全图$G' = ⟨ V,E' ⟩$,且权值$d(v_1,v_2) = cases(delim: "{", L\/n \, & upright("若 ") \( u \, v \) in E, L+1 \, & upright("若 ") \( u \, v \) in.not E)$.若$G$有哈密顿回路,$G'$
 也有,而且权值为$n times L/n = L$.反之,若$G'$的TSP问题有解,那肯定边都落在$E$里,进而$G$是一个哈密顿环路的图.
 ]
 
@@ -278,20 +278,20 @@ NPI class: the class of problems that they and their  complementation are in NP,
 
 
 === 顶点覆盖,独立集,团
-Clique $lt.slant_K$ Vertex Cover.$G = angle.l V,E angle.r$有一个大小为$k$的团$S$，补图就有一个大小为$k$的独立集$S$(一组点两两之间都没有边)，则$overline(G)$的所有边全部落在$V\/ S$之中。
+Clique $lt.slant_K$ Vertex Cover.$G = ⟨ V,E ⟩$有一个大小为$k$的团$S$，补图就有一个大小为$k$的独立集$S$(一组点两两之间都没有边)，则$overline(G)$的所有边全部落在$V\/ S$之中。
 #line()
 SAT $lt.slant_K$ Clique. $forall S in "SAT"$,S有m个子句,n个元素($x,not x$视为不同的元素).
-    $ G = angle.l V,E angle.r,V eq.delta {x_1, x_2, ... , x_n| x_i in S},E eq.delta {(x_i, x_j) | x_i,x_j "不在一个子句中且不矛盾"} $
+    $ G = ⟨ V,E ⟩,V eq.delta {x_1, x_2, ... , x_n| x_i in S},E eq.delta {(x_i, x_j) | x_i,x_j "不在一个子句中且不矛盾"} $
 
     如果这 $m$ 个点两两都有边（即"团"），就意味着：
     - 它们来自 $m$ 个不同的子句（涵盖了所有子句）。
     - 它们彼此不冲突、不相关（这些文字可以同时为 True，而不会导致逻辑上的自相矛盾）。#footnote[gemini认为,同一个变量在不同子句中的出现”视为完全独立的顶点]
 #line()
 SAT $lt.slant_K$ Unique Set. $forall S in "SAT"$,S有m个子句,n个元素($x,not x$视为不同的元素).
-    $ G = angle.l V,E angle.r,V eq.delta {x_1, x_2, ... , x_n| x_i in S},E eq.delta {(x_i, x_j) | x_i,x_j "在一个子句中或矛盾"} $
+    $ G = ⟨ V,E ⟩,V eq.delta {x_1, x_2, ... , x_n| x_i in S},E eq.delta {(x_i, x_j) | x_i,x_j "在一个子句中或矛盾"} $
 其实目的是构造一个团的补图.如果一个图有团,那它的补图里,团就变成了独立集.
 #line()
-Vertex Cover $lt.slant_K$ Set Covering.$forall G = angle.l V,E angle.r in "Vertex Cover"$，$cal(U) = E,S_v eq.delta {e in cal(U) | v in e}$，即直接选择Vertex Cover问题中那些能覆盖所有边的点即可。#line()
+Vertex Cover $lt.slant_K$ Set Covering.$forall G = ⟨ V,E ⟩ in "Vertex Cover"$，$cal(U) = E,S_v eq.delta {e in cal(U) | v in e}$，即直接选择Vertex Cover问题中那些能覆盖所有边的点即可。#line()
 === $"2SAT" in #p$
 _Proof_.对于每个变量$x$,创建图的两个点$x,not x$.对于字句$x or y$,连边$not x -> y , not y -> x$.
 
@@ -397,7 +397,7 @@ $ W_pi = { \( x_1 \, dots.h \, x_n \) divides x_(pi \( 1 \)) < x_(pi \( 2 \)) < 
 每个$W_pi$是连通的，由线性不等式组定义的解空间是凸的,而且任意两点可通过直线路径连接：$forall upright(bold(a)) \, upright(bold(b)) in W_pi$，有$t upright(bold(a)) + \( 1 - t \) upright(bold(b)) in W_pi$（$0 lt.eq t lt.eq 1$）
 
 熟知对任意两个不同排列$pi eq.not sigma$，必有：
-$ W_pi sect W_sigma = nothing $ ,$forall upright(bold(x)) in W$，可通过排序得到唯一排列$pi$使$x_(pi \( 1 \)) < dots.h.c < x_(pi \( n \))$.故$upright(bold(x)) in W_pi$且不属于其他$W_sigma$
+$ W_pi ∩ W_sigma = nothing $ ,$forall upright(bold(x)) in W$，可通过排序得到唯一排列$pi$使$x_(pi \( 1 \)) < dots.h.c < x_(pi \( n \))$.故$upright(bold(x)) in W_pi$且不属于其他$W_sigma$
 
 所以在$bb(R)^n$空间中,每个超平面$x_i = x_j$将空间分成两个半空间,一共有$abs(S(n))$个联通分支数量.
 

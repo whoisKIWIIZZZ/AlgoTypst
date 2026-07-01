@@ -2,12 +2,11 @@
 #import "@preview/thmbox:0.3.0": *
 #import "@preview/hydra:0.6.2": hydra
 #import "@preview/i-figured:0.2.4"
-#import "@preview/cetz:0.4.1"
+#import "@preview/cetz:0.5.2"
 #import "@preview/mitex:0.2.7": *
 #import "@preview/cuti:0.4.0": show-cn-fakebold
 #import "@preview/marginalia:0.3.1" as marginalia
 #import "@preview/marginalia:0.3.1":wideblock
-
 // ======================================================
 // 1. 全局状态与组件定义
 // ======================================================
@@ -170,7 +169,7 @@
 
   // 3. 其他正文细节
   show math.equation: i-figured.show-equation.with(only-labeled: true, level: 2)
-  show math.equation: set text(font: ("New Computer Modern Math",) + font, purple)
+  show math.equation: set text(font: ("New Computer Modern Math",) + font, black)
   show raw.where(block: false): it => {
     set text(font: ("JetBrains Mono", "STSong", "SimSun"))
     box(fill: luma(240), inset: (x: 3pt), radius: 2pt, it)

@@ -1,10 +1,10 @@
 #import "lib.typ": *
-
 #show: conf.with(
   author: "BJHH2005,kiwiizzz,xhkzdepartedream,Zoomy,kaizhaolin",
   title: "AlgoAnalysis",
   sidebar: false
 )
+#show math.equation: set text(fill: black)
 #include "chaptersTypst/chapter1.typ"
 #include "chaptersTypst/chapter2.typ"
 #include "chaptersTypst/chapter3.typ"
